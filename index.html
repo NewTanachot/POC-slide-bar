@@ -1,0 +1,163 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+
+    <div>
+        <p>input slider bar number</p>
+        <input id="firstSliderValue" type="number" min="0" max="15000000" value=0 style="width: 100px;"
+            onkeyup="firstInputChange(this.value)"></input>
+        <input id="secondSliderValue" type="number" min="0" max="15000000" value=15000000 style="width: 100px;"
+            onkeyup="secondInputChange(this.value)"></input>
+    </div>
+
+    <div>
+        <p>real slider bar number</p>
+        <input id="firstRealSliderValue" type="number" style="width: 100px;" value=0 disabled>
+        <input id="secondRealSliderValue" type="number" style="width: 100px;" value=15000000 disabled>
+    </div>
+
+    <div class="range_container">
+        <div class="sliders_control">
+          <input id="firstSlider" type="range" value="0" min="0" max="15000000" oninput="firstSliderChange()"/>
+          <input id="secondSlider" type="range" value="15000000" min="0" max="15000000" oninput="secondSliderChange()"/>
+        </div>
+      </div>
+</body>
+</html>
+
+<script>
+    var arr_values = [0, 3000, 6000, 9000, 12000, 15000, 18000, 21000, 24000, 27000, 30000, 33000, 
+        36000, 39000, 42000, 45000, 48000, 51000, 54000, 57000, 60000, 63000, 66000, 69000, 72000, 75000, 
+        78000, 81000, 84000, 87000, 90000, 93000, 96000, 99000, 102000, 105000, 108000, 111000, 114000, 117000, 
+        120000, 123000, 126000, 129000, 132000, 135000, 138000, 141000, 144000, 147000, 150000, 160000, 170000, 
+        180000, 190000, 200000, 210000, 220000, 230000, 240000, 250000, 260000, 270000, 280000, 290000, 300000, 
+        310000, 320000, 330000, 340000, 350000, 385000, 420000, 455000, 490000, 525000, 560000, 595000, 630000, 
+        665000, 700000, 780000, 860000, 940000, 1020000, 1100000, 1180000, 1260000, 1340000, 1420000, 1500000, 
+        2850000, 4200000, 5550000, 6900000, 8250000, 9600000, 10950000, 12300000, 13650000, 15000000];
+
+    // change input at first slider 
+    const firstInputChange = (inputValue) => {
+
+        let firstSlider = document.getElementById("firstSlider");
+        let firstRealSliderValue = document.getElementById("firstRealSliderValue");
+
+        // if the given array isn't order properly. sort it before go any further !!!
+        const sliderValue = arr_values.find(e => e >= inputValue);
+        firstSlider.value = sliderValue;
+        firstRealSliderValue.value = sliderValue;
+    }
+
+    // change input at second slider
+    const secondInputChange = (inputValue) => {
+
+        let secondSlider = document.getElementById("secondSlider");
+        let secondRealSliderValue = document.getElementById("secondRealSliderValue");
+
+        // if the given array isn't order properly. sort it before go any further !!!
+        const sliderValue = arr_values.find(e => e >= inputValue);
+        secondSlider.value = sliderValue;
+        secondRealSliderValue.value = sliderValue;
+    }
+
+    // change slider at first slider 
+    const firstSliderChange = () => {
+        
+        let firstSlider = document.getElementById("firstSlider");
+        let firstInput = document.getElementById("firstSliderValue");
+        let firstRealSliderValue = document.getElementById("firstRealSliderValue");
+
+        const inputValue = arr_values.find(e => e >= firstSlider.value)
+
+        firstInput.value = firstSlider.value;
+        firstSlider.value = inputValue;
+        firstRealSliderValue.value = inputValue;
+    }
+
+    // change slider at second slider 
+    const secondSliderChange = () => {
+
+        let secondSlider = document.getElementById("secondSlider")
+        let secondInput = document.getElementById("secondSliderValue");
+        let secondRealSliderValue = document.getElementById("secondRealSliderValue");
+        
+        const inputValue = arr_values.find(e => e >= secondSlider.value)
+
+        secondInput.value = secondSlider.value;
+        secondSlider.value = inputValue;
+        secondRealSliderValue.value = inputValue;
+    }
+</script>
+
+<style>
+    .range_container {
+    display: flex;
+    flex-direction: column;
+    width: 80%;
+    margin: 35% auto;
+    }
+
+    .sliders_control {
+    position: relative;
+    min-height: 50px;
+    }
+
+    .form_control {
+    position: relative;
+    display: flex;
+    justify-content: space-between;
+    font-size: 24px;
+    color: #635a5a;
+    }
+
+    input[type=range]::-webkit-slider-thumb {
+    -webkit-appearance: none;
+    pointer-events: all;
+    width: 24px;
+    height: 24px;
+    background-color: #fff;
+    border-radius: 50%;
+    box-shadow: 0 0 0 1px #C6C6C6;
+    cursor: pointer;
+    }
+
+    input[type=range]::-moz-range-thumb {
+    -webkit-appearance: none;
+    pointer-events: all;
+    width: 24px;
+    height: 24px;
+    background-color: #fff;
+    border-radius: 50%;
+    box-shadow: 0 0 0 1px #C6C6C6;
+    cursor: pointer;
+    }
+
+    input[type=range]::-webkit-slider-thumb:hover {
+    background: #f7f7f7;
+    }
+
+    input[type=range]::-webkit-slider-thumb:active {
+    box-shadow: inset 0 0 3px #387bbe, 0 0 9px #387bbe;
+    -webkit-box-shadow: inset 0 0 3px #387bbe, 0 0 9px #387bbe;
+    }
+
+    input[type="range"] {
+    -webkit-appearance: none;
+    appearance: none;
+    height: 10px;
+    width: 100%;
+    position: absolute;
+    background-color: #f79847;
+    pointer-events: none;
+    }
+
+    #firstSlider {
+    height: 0;
+    z-index: 1;
+    top: 5px;
+    }
+</style>
